@@ -1,0 +1,41 @@
+<html>
+   <body>
+
+      <form id="f2">
+         <input type="text" name="url" value="tek"/>
+         <input type="file" name="fileToUpload[]" onchange="submitu()" accept="image/*" multiple />
+      </form>
+
+      <button id="ojej">heh</button>
+      <p></p>
+      <hr>
+      <div></div>
+   </body>
+
+   <script>
+      let res
+      document.getElementById('ojej').addEventListener('click', () => {
+         submitu()
+      })
+
+      function submitu() {
+         // alert('wat')
+         let heh = new XMLHttpRequest()
+         heh.onreadystatechange = function() {
+            if(this.readyState == 4 && this.status == 200) {
+               // res = JSON.parse(this.responseText)
+               // let result = ""
+               // for(let key in res['files2']) {
+               //    result += `${key}:  ${res['files2'][key]}<br>`
+               // }
+               // document.querySelector('p').innerHTML = result
+               document.querySelector('div').innerHTML = this.responseText
+            }
+         }
+         heh.open("POST", "multiplefiles2", true)
+         // heh.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+         heh.send(new FormData(document.getElementById('f2'))); 
+      }
+   </script>
+      
+</html>
